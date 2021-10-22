@@ -1,0 +1,17 @@
+.button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+  padding: 10px;
+  color: white;
+  text-transform: uppercase;
+  background-image: linear-gradient(to right, #bdc3c7, #2c3e50);
+  border-radius: 4px;
+  border: transparent;
+  cursor: pointer;
+}
+
+.button.is-hidden {
+  display: none;
+}
