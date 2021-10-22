@@ -29,11 +29,11 @@ function onSearchImages(event) {
   refs.searchForm.reset();
 }
 
-function getGalleryImages() {
+async function getGalleryImages() {
   loadMoreBtn.disable();
-  apiService
-    .fetchImages()
-    .then(data => {
+
+  try {
+    apiService.fetchImages().then(data => {
       if (data.hits.length !== 0) {
         onRenderMarkup(data.hits);
         loadMoreBtn.show();
@@ -43,11 +43,11 @@ function getGalleryImages() {
         showNotification();
         loadMoreBtn.hide();
       }
-    })
-    .catch(error => {
-      console.log(error);
-      showNotification();
     });
+  } catch (error) {
+    showNotification();
+    throw error;
+  }
 }
 
 function onRenderMarkup(images) {
