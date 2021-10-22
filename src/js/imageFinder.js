@@ -40,8 +40,7 @@ async function getGalleryImages() {
         loadMoreBtn.enable();
         setTimeout(onScrollPage, 1000);
       } else {
-        showNotification();
-        loadMoreBtn.hide();
+        throw showNotification();
       }
     });
   } catch (error) {
@@ -70,4 +69,5 @@ function showNotification() {
   error({
     text: `${message}`,
   });
+  loadMoreBtn.hide();
 }
