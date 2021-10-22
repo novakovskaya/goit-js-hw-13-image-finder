@@ -30,17 +30,21 @@ function onSearchImages(event) {
 }
 
 async function getGalleryImages() {
+  // let message = '';
   loadMoreBtn.disable();
 
   try {
     apiService.fetchImages().then(data => {
-      if (data.hits.length !== 0) {
+      if (data.hits.length === 0) {
+        showNotification();
+      } else if (data.hits.length < 12) {
+        onRenderMarkup(data.hits);
+        loadMoreBtn.hide();
+      } else if (data.hits.length >= 12) {
         onRenderMarkup(data.hits);
         loadMoreBtn.show();
         loadMoreBtn.enable();
         setTimeout(onScrollPage, 1000);
-      } else {
-        throw showNotification();
       }
     });
   } catch (error) {
@@ -65,9 +69,9 @@ function onScrollPage() {
 }
 
 function showNotification() {
+  loadMoreBtn.hide();
   const message = 'Requested images not found!';
   error({
     text: `${message}`,
   });
-  loadMoreBtn.hide();
 }
