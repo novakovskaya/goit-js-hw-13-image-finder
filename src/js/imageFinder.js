@@ -45,8 +45,8 @@ async function getGalleryImages() {
       }
     });
   } catch (error) {
+    console.log(error);
     showNotification();
-    throw error;
   }
 }
 
